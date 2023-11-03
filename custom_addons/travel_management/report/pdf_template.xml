@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="tour_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div style="text-align: center">
+                        <h2>Travels Management Report</h2>
+                    </div>
+                    <div t-if="partner_id">
+                        <strong>Customer:
+                            <t t-esc="data.get('partner_name')"/>
+                        </strong>
+                    </div>
+                    <div t-if="date_from">
+                        <strong>Date From:
+                            <t t-esc="data.get('date_from')"/>
+                        </strong>
+                    </div>
+                    <div t-if="date_to">
+                        <strong>Date To:
+                            <t t-esc="data.get('date_to')"/>
+                        </strong>
+                    </div>
+                    <div t-if="vehicle_name">
+                        <strong>Vehicle Name:
+                            <t t-esc="data.get('vehicle_name')"/>
+                        </strong>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sl. No</th>
+                                <th>Customer</th>
+                                <th>Source Location</th>
+                                <th>Destination Location</th>
+                                <th>Booking Date</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Vehicle Name</th>
+                                <th>State</th>
+                                <th>Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="tour_count" t-value="1"/>
+                            <t t-foreach="report" t-as="r">
+                                <tr>
+                                    <td>
+                                        <t t-esc="tour_count"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('customer_id')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('source_loc_id')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('destination_loc_id')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('quotation_date')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('start_date')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('end_date')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('vehicle_list_id')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('state')"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="r.get('subtotal')"/>
+                                    </td>
+                                </tr>
+                                <t t-set="tour_count" t-value="tour_count + 1"/>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div>
+                        <t>Report Date:
+                            <t t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"/>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

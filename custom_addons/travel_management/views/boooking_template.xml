@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="website_booking">
+        <t t-call="website.layout">
+            <div class="container">
+                <form role="form" action="/create/booking" id="booking_form" method="POST">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                    <div class="form-group">
+                        <label for="customer_id">Name:</label>
+                        <select id="customer_id" name='customer_id' class="form-control">
+                            <t t-foreach="customer_id" t-as="customer">
+                                <option t-att-value="customer.id">
+                                    <t t-esc="customer.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date">Booking Date</label>
+                        <input type="date" id="booking_date" name="booking_date" class="form-control" required="1"/>
+                    </div>
+                    <div>
+                        <label for="passengers">Number of Passengers</label>
+                        <input type="number" id="passenger" name="passengers" value="1" class="form-control"/>
+                    </div>
+                    <div>
+                        <label for="source_location_id">Source Location:</label>
+                        <select id="source_location_id" name='source_location_id' class="form-control">
+                            <t t-foreach="source_location_id" t-as="source_location">
+                                <option t-att-value="source_location.id">
+                                    <t t-esc="source_location.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="destination_location_id">Destination Location:</label>
+                        <select id="destination_location_id" name='destination_location_id' class="form-control">
+                            <t t-foreach="destination_location_id" t-as="destination_location">
+                                <option t-att-value="destination_location.id">
+                                    <t t-esc="destination_location.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="travelling_date">Travelling Date</label>
+                        <input type="date" id="travel_date" name="travel_date" class="form-control" required="1"/>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <record id="booking_thanks" model="website.page">
+        <field name="name">Thanks</field>
+        <field name="type">qweb</field>
+        <field name="url">/booking-thanks</field>
+        <field name="website_published">True</field>
+        <field name="key">travel_management.booking_thanks</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="travel_management.booking_thanks">
+                <t t-call="website.layout">
+                    <div id="wrap">
+                        <div class="container">
+                            <h1>Thank you!</h1>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="alert alert-success" role="status">
+                                        Your Booking is Successfully created..
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+    <template id="bookings_list">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h2>Travel Management</h2>
+                </div>
+                <div class="page">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Booking Reference</th>
+                                <th>Customer</th>
+                                <th>Booking Date</th>
+                                <th>Number of Passengers</th>
+                                <th>Source Location</th>
+                                <th>Destination Location</th>
+                                <th>Travelling Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="bookings" t-as="item">
+                            <tr>
+                                <td>
+                                    <t t-esc="item.booking_reference"/>
+                                </td>
+                                <td>
+                                    <t t-esc="item.customer_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="item.booking_date"/>
+                                </td>
+                                <td>
+                                    <t t-esc="item.passengers"/>
+                                </td>
+                                <td>
+                                    <t t-esc="item.source_location_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="item.destination_location_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="item.travel_date"/>
+                                </td>
+                            </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

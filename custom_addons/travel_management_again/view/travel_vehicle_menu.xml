@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--  Vehicle  -->
+    <record id="travel_vehicle_action" model="ir.actions.act_window">
+        <field name="name">Travel Vehicle</field>
+        <field name="res_model">travel.vehicle</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <!-- Facilities -->
+    <record id="vehicle_facilities_action" model="ir.actions.act_window">
+        <field name="name">Vehicle Facilities</field>
+        <field name="res_model">vehicle.facilities</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <menuitem parent="travel_booking_second_menu_root" id="travel_booking_second_menu_root3" name="Vehicles" action="travel_vehicle_action"/>
+
+    <menuitem parent="travel_booking_second_menu_root" id="travel_booking_second_menu_root4" name="Facilities" action="vehicle_facilities_action"/>
+
+</odoo>

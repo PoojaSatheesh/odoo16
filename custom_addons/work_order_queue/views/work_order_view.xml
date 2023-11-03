@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--   tree view -->
+    <record id="work_order_view_tree" model="ir.ui.view">
+        <field name="name">work.order.view.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <tree string="work order" editable="top" default_order="delivery_date asc">
+                <field name="name"/>
+                <field name="machines_id"/>
+                <field name="materials_received"/>
+                <field name="delivery_date"/>
+                <field name="product_uom_qty"/>
+                <field name="price_unit"/>
+                <field name="order_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--filter group-by -->
+    <record id="work_order_search_inherit" model="ir.ui.view">
+        <field name="name">sale.order.line.inherit</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_sales_order_line_filter"/>
+        <field name="arch" type="xml">
+            <!--    filter    -->
+            <field name="order_id" position="after">
+                <filter string="Materials Received" name="materials_received"
+                        domain="[('materials_received', '=',True)]"/>
+            </field>
+
+            <!--  group-by    -->
+            <field name="product_id" position="after">
+                <group expand="0" string="Group By">
+                    <filter string="Machines" name="machines_id" domain="[]" context="{'group_by': 'machines_id'}"/>
+                    <filter string="Sale Order" name="order_id" domain="[]" context="{'group_by': 'order_id'}"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <!--  work order queue action  -->
+    <record id="work_order_action" model="ir.actions.act_window">
+        <field name="name">Work Order Queue</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="work_order_view_tree"/>
+    </record>
+
+    <menuitem parent="sale.sale_order_menu" id="work_order_menu_root1" name="Work Order Queue"
+              action="work_order_action"/>
+
+</odoo>

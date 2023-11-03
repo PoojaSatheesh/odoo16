@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    	<record model="travel.service.type" id="service_type_data">
+            <field name="name">Tour package</field>
+            <field name="expiration_days">4</field>
+        </record>
+    </data>
+</odoo>

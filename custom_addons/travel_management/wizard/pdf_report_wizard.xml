@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pdf_report_view_form" model="ir.ui.view">
+        <field name="name">pdf.report.wizard.form</field>
+        <field name="model">pdf.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Pdf Report">
+                <group>
+                    <group>
+                        <field name="partner_id" options="{'no_create': True}"/>
+                        <field name="vehicle_name" options="{'no_create': True}"/>
+                    </group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_xlsx_report"
+                            string="XLSX"
+                            type="object"
+                            class="btn-primary"/>
+                    <button name="print_pdf_report"
+                            string="PDF"
+                            type="object"
+                            class="btn-primary"/>
+
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="pdf_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">PDF Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pdf.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="pdf_report_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

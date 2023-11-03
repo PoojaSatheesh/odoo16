@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+   <!--booking form view-->
+    <record id="travel_booking_form_view" model="ir.ui.view">
+        <field name="name">travel.booking</field>
+        <field name="model">travel.booking</field>
+        <field name="arch" type="xml">
+            <form string="travel booking">
+               <!-- Status bar and button   -->
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,expired"/>
+                    <button name="button_confirm" class="oe_highlight" states="draft" string="Confirmed" type="object"/>
+                </header>
+                <sheet>
+                    <field name="booking_reference" style="font-size:30px;"/>
+                    <group>
+                        <group>
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer_id', 'show_address': 1, 'show_vat': True}" options="{&quot;always_reload&quot;: True}"/>
+                            <field name="number_of_passengers"/>
+                            <field name="service_type"/>
+                            <field name="service_id" options="{'no_create': True}" />
+                            <field name="expiration_date" attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                        </group>
+                            <group>
+                                <field name="booking_date"/>
+                                <field name="source_location_id"/>
+                                <field name="destination_location_id"/>
+                                <field name="traveling_date"/>
+                            </group>
+                    </group>
+                </sheet>
+                <!-- Chatter     -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+  <!-- booking tree view   -->
+    <record id="travel_booking_view_tree" model="ir.ui.view">
+        <field name="name">travel.booking.view.tree</field>
+        <field name="model">travel.booking</field>
+        <field name="arch" type="xml">
+            <tree string="Booking">
+                <field name="booking_reference"/>
+                <field name="partner_id"/>
+                <field name="service_type"/>
+                <field name="booking_date"/>
+                <field name="source_location_id" optional="hide"/>
+                <field name="destination_location_id" optional="hide"/>
+                <field name="state" widget="badge" decoration-success="state == 'confirmed'" decoration-primary="state == 'draft'" decoration-warning="state == 'expired'" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    booking search view-->
+    <record id="travel_booking_search" model="ir.ui.view">
+        <field name="name">travel.booking.search</field>
+        <field name="model">travel.booking</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="booking_reference"/>
+                <field name="partner_id"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state', '=','confirmed')]"/>
+                <filter string="Expired" name="expired" domain="[('state', '=','expired')]"/>
+                <filter string="Bus" name="bus" domain="[('service_type', '=','bus')]"/>
+                <filter string="Train" name="train" domain="[('service_type', '=','train')]"/>
+                <filter string="Flight" name="flight" domain="[('service_type', '=','flight')]"/>
+                <filter string="Active Bookings" name="active_bookings" domain="[('state','!=','expired')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Destination Location" name="destination_location_id" context="{'group_by': 'destination_location_id'}"/>
+                    <filter string="Travelling Date" name="traveling_date" context="{'group_by': 'traveling_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!--locations tree view -->
+    <record id="travel_location_view_tree" model="ir.ui.view">
+        <field name="name">travel.locations.view.tree</field>
+        <field name="model">travel.location</field>
+        <field name="arch" type="xml">
+            <tree string="locations" editable="top">
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- service type tree view   -->
+    <record id="travel_service_type_view_tree" model="ir.ui.view">
+        <field name="name">travel.service.type.view.tree</field>
+        <field name="model">travel.service.type</field>
+        <field name="arch" type="xml">
+            <tree string="locations" editable="top">
+                <field name="name"/>
+                <field name="expiration_days"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

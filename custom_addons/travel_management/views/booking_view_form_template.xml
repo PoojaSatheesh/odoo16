@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="bookings_form_view">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h2>Travel Management</h2>
+                </div>
+                <div>
+                    <label for="customer_id">Name:</label>
+                    <input type="char" id="customer" name="customer" t-att-value="travel_booking.customer_id.name" class="form-control" readonly="1"/>
+                </div>
+                <div>
+                    <label for="booking_date">Booking Date</label>
+                    <input id="booking_date" name="booking_date" class="form-control" t-att-value="travel_booking.booking_date" readonly="1"/>
+                </div>
+                <div>
+                    <label for="passengers">Number of Passengers</label>
+                    <input type="number" id="passenger" name="passengers" t-att-value="travel_booking.passengers" class="form-control" readonly="1"/>
+                </div>
+                <div>
+                    <label for="source_location_id">Source Location:</label>
+                    <input type="char" id="source_location_id" name="source_location_id" t-att-value="travel_booking.source_location_id.name" class="form-control"
+                           readonly="1"/>
+                </div>
+                <div>
+                    <label for="destination_location_id">Destination Location:</label>
+                    <input type="char" id="destination_location_id" name="destination_location_id" t-att-value="travel_booking.destination_location_id.name" class="form-control"
+                           readonly="1"/>
+                </div>
+                <div>
+                    <label for="travelling_date">Travelling Date</label>
+                    <input id="travel_date" name="travel_date" class="form-control" t-att-value="travel_booking.travel_date" readonly="1"/>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

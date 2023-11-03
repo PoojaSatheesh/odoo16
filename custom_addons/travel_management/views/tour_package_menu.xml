@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="tour_package_action" model="ir.actions.act_window">
+        <field name="name">Tour Package</field>
+        <field name="res_model">travels.tour.package</field>
+        <field name="view_mode">tree,form,kanban,calendar</field>
+    </record>
+
+    <menuitem parent="travels_second_menu_root" id="travels_second_menu_root5" name="Tour Package" action="tour_package_action"/>
+</odoo>

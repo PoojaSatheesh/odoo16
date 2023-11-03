@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!--  Record rules for model- travel_booking  -->
+        <!--  Manager access  -->
+    <record id="manager_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field name="model_id" ref="travel_management.model_travel_management"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_manager_access'))]"/>
+    </record>
+
+        <!-- User access  -->
+    <record id="user_access_rule" model="ir.rule">
+        <field name="name">All the booking created from own company </field>
+        <field name="model_id" ref="travel_management.model_travel_management"/>
+        <field name="domain_force">['|',('company_id','=',False), ('company_id', '=', user.company_id.id)]
+        </field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+ <!--  Record rule for model- tour_package  -->
+        <!--  Manager access  -->
+    <record id="manager_tour_package_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field name="model_id" ref="travel_management.model_travels_tour_package"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_manager_access'))]"/>
+    </record>
+        <!-- User access  -->
+    <record id="user_tour_package_access_rule" model="ir.rule">
+        <field name="name">All tour</field>
+        <field name="model_id" ref="travel_management.model_travels_tour_package"/>
+        <field name="domain_force">['|',('company_id','=',False), ('company_id', '=', user.company_id.id)]
+        </field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+
+    <!--  Record rule for model- travels_service_types  -->
+        <!--  Manager access  -->
+    <record id="manager_service_types_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field name="model_id" ref="travel_management.model_travels_service_types"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_manager_access'))]"/>
+    </record>
+        <!-- User access  -->
+    <record id="user_service_types_access_rule" model="ir.rule">
+        <field name="name">All service</field>
+        <field name="model_id" ref="travel_management.model_travels_service_types"/>
+        <field name="domain_force">['|',('company_id','=',False), ('company_id', '=', user.company_id.id)]
+        </field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+
+  <!--  Record rule for model- travels_vehicle  -->
+        <!--  Manager access  -->
+    <record id="manager_vehicle_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field name="model_id" ref="travel_management.model_travels_vehicle"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_manager_access'))]"/>
+    </record>
+        <!-- User access  -->
+    <record id="user_vehicle_access_rule" model="ir.rule">
+        <field name="name">All service</field>
+        <field name="model_id" ref="travel_management.model_travels_vehicle"/>
+        <field name="domain_force">['|',('company_id','=',False), ('company_id', '=', user.company_id.id)]
+        </field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+
+    <!--  Record rule for model- travels_locations  -->
+        <!--  Manager access  -->
+    <record id="manager_location_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field name="model_id" ref="travel_management.model_travels_location"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_manager_access'))]"/>
+    </record>
+        <!-- User access  -->
+    <record id="user_location_access_rule" model="ir.rule">
+        <field name="name">All locations</field>
+        <field name="model_id" ref="travel_management.model_travels_location"/>
+        <field name="domain_force">['|',('company_id','=',False), ('company_id', '=', user.company_id.id)]
+        </field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+
+    <!--  Record rule for model- vehicle_facilities  -->
+        <!--  Manager access  -->
+    <record id="manager_facilities_access_rule" model="ir.rule">
+        <field name="name">All Records</field>
+        <field name="model_id" ref="travel_management.model_travels_vehicle_facilities"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_manager_access'))]"/>
+    </record>
+        <!-- User access  -->
+    <record id="user_facilities_access_rule" model="ir.rule">
+        <field name="name">All facilities</field>
+        <field name="model_id" ref="travel_management.model_travels_vehicle_facilities"/>
+        <field name="domain_force">['|',('company_id','=',False), ('company_id', '=', user.company_id.id)]
+        </field>
+        <field name="groups"
+               eval="[Command.link(ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+</odoo>
+

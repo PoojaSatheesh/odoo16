@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="booking_details_snippet" name="Travel Management">
+        <section class="oe_structure container dynamic_snippet_blog">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="text-center py-5">
+                            <h1 class="h1">Travel Management</h1>
+                            <div class="h3" style="text-align:center">BOOKINGS</div>
+                            <div id="courosel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+    <template id="external_snippets" inherit_id="website.snippets" priority="2">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="travel_management.booking_details_snippet"/>
+        </xpath>
+    </template>
+
+</odoo>

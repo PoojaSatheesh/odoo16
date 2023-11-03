@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <templates>
+        <t t-name="travel_management.booking_carousel">
+        <div id="course_carousel" class="container carousel slide" data-bs-ride="carousel"
+             t-att-data-bs-interval="interval">
+            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                <t t-foreach="chunks" t-as="chunk">
+                    <div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                        <div class="row">
+                            <t t-foreach="chunk" t-as="item">
+                                <div class="block span3 col-3">
+                                    <div class="card-group">
+                                        <div class="card">
+                                            <img class="card-img-top" src="travel_management/static/img/tour_image.jpg"
+                                                 style="padding: 0px; margin: 0px; height: 160px; width:305px;"/>
+                                            <a t-attf-href="/booking_form/{{item.id}}">
+                                                <h4>
+                                                    <t t-esc="item.booking_reference"/>
+                                                </h4>
+                                                <h5>
+                                                    <t t-esc="item.customer_id[1]"/>
+                                                </h5>
+                                                <h6>
+                                                    <span>Source Location:</span>
+                                                    <t t-esc="item.source_location_id[1]"/>
+                                                </h6>
+                                                <h6>
+                                                    <span>Destination Location:</span>
+                                                    <t t-esc="item.destination_location_id[1]"/>
+                                                </h6>
+                                                <h6>
+                                                    <span>Travelling Date:</span>
+                                                    <t t-esc="item.travel_date"/>
+                                                </h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+            <a t-attf-href="#course_carousel" data-bs-slide="prev" role="button"
+               aria-label="Previous" title="Previous">
+                <span class="fa fa-chevron-circle-left"/>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a t-attf-href="#course_carousel" data-bs-slide="next" role="button"
+               aria-label="Next" title="Next">
+                <span class="fa fa-chevron-circle-right"/>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </t>
+    </templates>

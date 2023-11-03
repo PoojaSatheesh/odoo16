@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="tour_package_form_view" model="ir.ui.view">
+        <field name="name">tour.package</field>
+        <field name="model">travels.tour.package</field>
+        <field name="arch" type="xml">
+            <form string="tour package">
+                <header>
+                    <button name="action_confirmed" class="oe_highlight" states="draft" string="Confirmed" type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="customer_id"/>
+                            <field name="quotation_date"/>
+                            <field name="source_loc_id"/>
+                            <field name="destination_loc_id"/>
+                            <field name="vehicle_type"/>
+                            <field name="company_id"/>
+                            <field name="user_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="no_travellers"/>
+                            <field name="facilities_ids" options="{'no_create': True}" widget="many2many_tags"/>
+                            <field name="vehicle_list_id"/>
+                            <field name="available_vehicles_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                     <notebook>
+                        <page name="tour_estimation_page" string="Estimation">
+                            <group>
+                                <group>
+                                    <field name="estimated_km"/>
+                                </group>
+                            </group>
+                            <field name="package_charge_ids">
+                                <tree editable="bottom" edit="1">
+                                    <control>
+                                    <create name="add_a_line" string="Add a Line"/>
+                                    </control>
+                                    <field name="service_id"/>
+                                    <field name="quantity"/>
+                                    <field name="amount"/>
+                                    <field name="subtotal" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+     <!-- tree tour package-->
+    <record id="tour_package_view_tree" model="ir.ui.view">
+        <field name="name">tour.package.view.tree</field>
+        <field name="model">travels.tour.package</field>
+        <field name="arch" type="xml">
+            <tree string="tour package">
+                <field name="customer_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="no_travellers"/>
+                <field name="vehicle_list_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--  Calendar view  -->
+    <record id="view_tour_package_calendar" model="ir.ui.view">
+        <field name="name">tour.package.calendar</field>
+        <field name="model">travels.tour.package</field>
+        <field name="arch" type="xml">
+            <calendar string="Tour Package" date_start="start_date" color="state" date_stop="end_date" mode="month">
+                <field name="state" invisible="1" filters="1"/>
+                <field name="vehicle_list_id" invisible="1" filters="1"/>
+            </calendar>
+        </field>
+    </record>
+</odoo>

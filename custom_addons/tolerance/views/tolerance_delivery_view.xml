@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="tolerance_in_delivery" model="ir.ui.view">
+            <field name="name">tolerance.in.delivery</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']"
+                       position="before">
+                    <field name="tolerance"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

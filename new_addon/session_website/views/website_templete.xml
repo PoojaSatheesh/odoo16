@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="website_session">
+        <t t-call="website.layout">
+            <div class="container">
+                <span>Hello,
+                    <t t-esc="request.env.user.name"/>
+                </span>
+                <form class="form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" name="phone" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="street">Street</label>
+                        <input type="text" name="street" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="country_ids">Country:</label>
+                        <select id="country_ids" class="form-control">
+                            <t t-foreach="country_ids" t-as="country">
+                                <option t-att-value="country.id">
+                                    <t t-esc="country.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="website_partner_view_template">
+        <t t-call="website.layout">
+            <div class="controller">
+                <div class="alert alert-success">
+                    <span>Successfully created
+                        <t t-esc="partner_id.name"/>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card col-3">
+                    <div class="card-header">
+                        <span t-esc="partner.name"/>
+                    </div>
+                    <div class="card-body">
+                        <span t-field="partner.image_1920"
+                              t-options="{widget:'image}"/>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

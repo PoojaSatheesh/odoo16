@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--tree view travels-->
+    <record id="travels_management_view_tree" model="ir.ui.view">
+        <field name="name">travel.management.view.tree</field>
+        <field name="model">travel.management</field>
+        <field name="arch" type="xml">
+            <tree string="travel management">
+                <field name="booking_reference"/>
+                <field name="customer_id"/>
+                <field name="services"/>
+                <field name="booking_date"/>
+                <field name="source_location_id" optional="hide"/>
+                <field name="destination_location_id" optional="hide"/>
+                <field name="company_id" optional="hide"/>
+                <field name="state" widget="badge" optional="hide" decoration-success="state == 'confirmed'" decoration-info="state== 'draft'"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--form view-->
+    <record id="travels_form_view" model="ir.ui.view">
+        <field name="name">travel.management</field>
+        <field name="model">travel.management</field>
+        <field name="arch" type="xml">
+            <form string="travel management">
+                <header>
+                    <button name="action_confirm" class="oe_highlight" states="draft" string="Confirm" type="object"/>
+                    <button name="action_create_invoice" class="oe_highlight" states="confirmed" string="Create Invoice"
+                            type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,expired,paid"/>
+                </header>
+                <sheet>
+                    <div name="button_box" position="inside">
+                        <button class="oe_stat_button" type="object" name="invoice_tab"
+                                icon="fa-money" string="Invoice"
+                                attrs="{'invisible':[('invoice','=', False)]}">
+                        </button>
+                    </div>
+
+                    <widget name="web_ribbon" title="Paid" attrs="{'invisible':[('state', '!=', 'paid')]}"/>
+
+                    <field name="booking_reference" style="font-size:30px;"/>
+                    <group>
+                        <group>
+                            <field name="customer_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer_id', 'show_address': 1, 'show_vat': True}" options="{&quot;always_reload&quot;: True}"/>
+                            <field name="booking_date"/>
+                            <field name="fees" attrs ="{'invisible':[('service_types_id','!=', False)]}"/>
+                            <field name="service_types_id"  options="{'no_create': True}" />
+                            <field name="invoice" invisible="1"/>
+                            <field name="paid_state" invisible="1"/><field name="user_id" invisible="1"/>
+                            <field name="company_id"/>
+                        </group>
+                            <group>
+                                <field name="passengers"/>
+                                <field name="services"/>
+                                <field name="source_location_id"/>
+                                <field name="destination_location_id"/>
+                                <field name="travel_date"/>
+                                <field name="expiration_date" attrs="{'invisible':[('state', '==', 'confirmed')]}"/>
+                            </group>
+                    </group>
+                    <notebook>
+                        <page name="package_estimation_amount" string="Package Estimation" attrs ="{'invisible':[('service_types_id','=', False)]}">
+                            <field name="package_child_ids">
+                                <tree editable="bottom">
+                                    <control>
+                                    <create name="add_a_line" string="Add a Line"/>
+                                    </control>
+                                    <field name="service_id"/>
+                                    <field name="quantity"/>
+                                    <field name="amount"/>
+                                    <field name="subtotal" sum="Total"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- calender  -->
+    <record id="view_travel_management_calendar" model="ir.ui.view">
+        <field name="name">travel.management.calendar</field>
+        <field name="model">travel.management</field>
+        <field name="arch" type="xml">
+            <calendar string="Booking" date_start="booking_date" color="state" date_stop="travel_date" mode="month">
+            </calendar>
+        </field>
+    </record>
+
+
+<!--search view-->
+    <record id="real_estate_search_view" model="ir.ui.view">
+        <field name="name">travel.management.search</field>
+        <field name="model">travel.management</field>
+        <field name="arch" type="xml">
+            <search string="travel management">
+                <field name="booking_reference"/>
+                <field name="customer_id"/>
+
+                <!-- filter -->
+                <filter string="Flight" name="services" domain="[('services', '=', 'flight')]"/>
+                <filter string="Train" name="services" domain="[('services', '=', 'train')]"/>
+                <filter string="Bus" name="services" domain="[('services', '=', 'bus')]"/>
+                <filter string="Confirmed" name="state" domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Expired" name="state" domain="[('state', '=', 'expired')]"/>
+                <filter string="Draft and Confirmed" name="default_filter" domain="[('state', '!=', 'expired')]"/>
+                <!-- group by -->
+                <group expand="0" string="Group By">
+                    <filter string="Destination Location" name="destination_location_id" context="{'group_by': 'destination_location_id'}"/>
+                    <filter string="Travelling Date" name="travel_date" context="{'group_by': 'travel_date'}"/>
+
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+
+    <!--locations tree view -->
+    <record id="locations_view_tree" model="ir.ui.view">
+        <field name="name">locations.view.tree</field>
+        <field name="model">travels.location</field>
+        <field name="arch" type="xml">
+            <tree string="locations" editable="top">
+                <field name="name"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+    <!--service types tree view -->
+    <record id="service_types_view_tree" model="ir.ui.view">
+        <field name="name">service.types.view.tree</field>
+        <field name="model">travels.service.types</field>
+        <field name="arch" type="xml">
+            <tree string="service types" editable="top">
+                <field name="name"/>
+                <field name="expiration"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- service types form view   -->
+    <record id="service_types_view_form" model="ir.ui.view">
+   <field name="name">service.types.view.form</field>
+   <field name="model">travels.service.types</field>
+   <field name="arch" type="xml">
+       <form string="service types">
+           <sheet>
+               <group>
+                   <group>
+                       <field name="name"/>
+                       <field name="expiration"/>
+                   </group>
+                   <group>
+                       <field name="company_id"/>
+                   </group>
+               </group>
+           </sheet>
+       </form>
+   </field>
+</record>
+</odoo>

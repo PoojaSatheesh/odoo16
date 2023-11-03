@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+  <!-- vehicle form view   -->
+    <record id="travel_booking_form_view" model="ir.ui.view">
+        <field name="name">travel.vehicle</field>
+        <field name="model">travel.vehicle</field>
+        <field name="arch" type="xml">
+            <form string="travel vehicle">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reg_no"/>
+                            <field name="vehicle_type"/>
+                            <field name="number_of_seats"/>
+                        </group>
+                            <group>
+                                <field name="vehicle_name" />
+                                <field name="facilities_ids" widget="many2many_tags"/>
+                            </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+   <!--  vehicle tree view  -->
+    <record id="travel_vehicle_view_tree" model="ir.ui.view">
+        <field name="name">travel.vehicle.view.tree</field>
+        <field name="model">travel.vehicle</field>
+        <field name="arch" type="xml">
+            <tree string="Vehicles">
+                <field name="reg_no"/>
+                <field name="vehicle_type"/>
+                <field name="vehicle_name"/>
+                <field name="number_of_seats"/>
+                <field name="facilities_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+   <!-- facilities tree view  -->
+    <record id="vehicle_facilities_view_tree" model="ir.ui.view">
+        <field name="name">vehicle.facilities.view.tree</field>
+        <field name="model">vehicle.facilities</field>
+        <field name="arch" type="xml">
+            <tree string="Facilities" editable="bottom">
+                <field name="facility"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

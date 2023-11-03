@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="real_estate_action" model="ir.actions.act_window">
+        <field name="name">Real Estate Plans</field>
+        <field name="res_model">real.estate</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+<!--Property types-->
+    <record id="property_types_action" model="ir.actions.act_window">
+        <field name="name">Property Types</field>
+        <field name="res_model">estate.property.type</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+<!--Property tags-->
+    <record id="property_tags_action" model="ir.actions.act_window">
+        <field name="name">Property Tags</field>
+        <field name="res_model">estate.property.tags</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+<!-- Menu-->
+    <menuitem id="estate_menu_root" name="Estate"/>
+
+    <!--advertisement-->
+    <menuitem id="estate_first_menu_root" name="Advertisement" parent="estate_menu_root"/>
+    <menuitem parent="estate_first_menu_root" id="estate_first_menu_root1" name="Properties" action="real_estate_action"/>
+
+     <!--settings-->
+    <menuitem id="estate_second_menu_root" name="Settings" parent="estate_menu_root"/>
+    <menuitem parent="estate_second_menu_root" id="estate_second_menu_root1" name="Property Type" action="property_types_action"/>
+    <menuitem parent="estate_second_menu_root" id="estate_second_menu_root2" name="Property Tags" action="property_tags_action"/>
+</odoo>

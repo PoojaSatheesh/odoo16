@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--tree view vehicles-->
+    <record id="vehicles_view_tree" model="ir.ui.view">
+        <field name="name">vehicles.view.tree</field>
+        <field name="model">travels.vehicle</field>
+        <field name="arch" type="xml">
+            <tree string="travel management">
+                <field name="reg_no"/>
+                <field name="vehicle_name"/>
+                <field name="facilities_ids"/>
+            </tree>
+        </field>
+    </record>
+
+
+<!--form view-->
+    <record id="vehicle_form_view" model="ir.ui.view">
+        <field name="name">travels.vehicle</field>
+        <field name="model">travels.vehicle</field>
+        <field name="arch" type="xml">
+            <form string="travel management">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reg_no"/>
+                            <field name="vehicle_type"/>
+                            <field name="facilities_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="vehicle_name"/>
+                            <field name="num_of_seats"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="vehicle_charge_page" string="Vehicle Charges">
+                            <field name="vehicle_charge_ids">
+                                <tree editable="bottom">
+                                    <control>
+                                    <create name="add_a_line" string="Add a Line"/>
+                                    </control>
+                                    <field name="service"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_id"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!--tree view facilities-->
+    <record id="vehicle_facilities_view_tree" model="ir.ui.view">
+        <field name="name">vehicle.facilities.view.tree</field>
+        <field name="model">travels.vehicle.facilities</field>
+        <field name="arch" type="xml">
+            <tree string="travel management" editable="bottom">
+                <field name="facilities"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

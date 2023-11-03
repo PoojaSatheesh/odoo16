@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--  Booking   -->
+    <record id="travel_booking_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_default_filter':1}</field>
+        <field name="name">Travel Management Again</field>
+        <field name="res_model">travel.booking</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+  <!--  Locations  -->
+    <record id="travel_locations_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_default_filter':1}</field>
+        <field name="name">Travel Locations</field>
+        <field name="res_model">travel.location</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+  <!-- Service Type   -->
+    <record id="travel_service_type_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_default_filter':1}</field>
+        <field name="name">Travel Service Type</field>
+        <field name="res_model">travel.service.type</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <menuitem id="travel_booking_menu_root" name="Travel Management Again"/>
+
+    <menuitem id="travel_booking_first_menu_root" name="Booking" parent="travel_booking_menu_root"/>
+    <menuitem parent="travel_booking_first_menu_root" id="travel_booking_first_menu_root1" name="Booking" action="travel_booking_action"/>
+
+    <menuitem id="travel_booking_second_menu_root" name="Configuration" parent="travel_booking_menu_root"/>
+    <menuitem parent="travel_booking_second_menu_root" id="travel_booking_second_menu_root1" name="Locations" action="travel_locations_action"/>
+
+    <menuitem parent="travel_booking_second_menu_root" id="travel_booking_second_menu_root2" name="Service Type" action="travel_service_type_action"/>
+
+
+</odoo>

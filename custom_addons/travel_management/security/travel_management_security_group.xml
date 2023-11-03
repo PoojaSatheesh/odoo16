@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record model="ir.module.category" id="travel_management_access">
+        <field name="name">Travel Management</field>
+        <field name="description">User access levels for Travel Management module</field>
+    </record>
+
+<!--user group-->
+    <record id="travel_management_user_access" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="travel_management.travel_management_access"/>
+
+    </record>
+<!--manager group-->
+    <record id="travel_management_manager_access" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="travel_management_access"/>
+        <field name="implied_ids" eval="[(4, ref('travel_management.travel_management_user_access'))]"/>
+    </record>
+
+</odoo>

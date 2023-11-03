@@ -1,0 +1,9 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_travel.booking,access_travel.booking,model_travel_booking,base.group_user,1,1,1,1
+access_travel.location,access_travel.location,model_travel_location,base.group_user,1,1,1,1
+access_travel.service.type,access_travel.service.type,model_travel_service_type,base.group_user,1,1,1,1
+access_travel.vehicle,access_travel.vehicle,model_travel_vehicle,base.group_user,1,1,1,1
+access_vehicle.facilities,access_vehicle.facilities,model_vehicle_facilities,base.group_user,1,1,1,1
+access_vehicle.charges,access_vehicle.charges,model_vehicle_charges,base.group_user,1,1,1,1
+
+

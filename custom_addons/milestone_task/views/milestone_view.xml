@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--  milestone in sale order line  -->
+    <record id="milestone_sale_order_line" model="ir.ui.view">
+        <field name="name">milestone.sale.order.line</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='name']"
+                   position="after">
+                <field name="milestone"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="project_create" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--  create project button  -->
+    <record id="create_project_milestone" model="ir.ui.view">
+        <field name="name">create.project.milestone</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_confirm']" position="after">
+                <button name="button_create_project"
+                        type="object"
+                        string="Create Project"
+                        class="btn-primary"
+                        attrs="{'invisible':[('project_create','=', True)]}"/>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_confirm']" position="after">
+                <button name="button_update_project"
+                        type="object"
+                        string="Update Project"
+                        class="btn-primary"
+                        attrs="{'invisible':['|',('project_create','!=', True),('state','=','sale')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

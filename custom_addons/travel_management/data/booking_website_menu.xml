@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="website_booking_menu" model="website.menu">
+        <field name="name">Booking</field>
+        <field name="url">/booking</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">60</field>
+    </record>
+
+    <record id="bookings" model="website.menu">
+        <field name="name">Travel Bookings</field>
+        <field name="url">/bookings</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">70</field>
+    </record>
+</odoo>

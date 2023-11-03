@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="import_lines_sale_order" model="ir.ui.view">
+        <field name="name">import.lines.sale.order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_confirm']" position="after">
+                <button name="action_import_lines"
+                        type="object"
+                        string="Import Lines"
+                        class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="amount_update_sale" model="ir.ui.view">
+        <field name="name">sale.amount.update</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="amount"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="amount_update_sale_button" model="ir.ui.view">
+        <field name="name">sale.amount.update.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount']" position="after">
+                <button name="action_update_amount"
+                        type="object"
+                        string="Update"
+                        class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="payment_sale_order" model="ir.ui.view">
+        <field name="name">sale.order.payment</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_confirm']" position="before">
+                <button name="action_register_payment_sale"
+                        type="object"
+                        string="Register Payment"
+                        class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
